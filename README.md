@@ -20,7 +20,15 @@ git clone https://github.com/TorchedSammy/Delta ~/.local/share/hilbish/libs/delt
 ```
 
 # Getting Started
-Assuming you have the default config, replace the `doPrompt` function with:
+Require Delta (`local delta = require 'delta'`) then initalize:
+```lua
+delta.init()
+```  
+It will handle the prompt on its own.
+
+But if you want to manage your hooks/how it works more, you can go with the more
+manual approach. Assuming you have the default config, replace the `doPrompt`
+function with:  
 ```lua
 function doPrompt(exitcode)
 	prompt(delta.prompt(exitcode))
