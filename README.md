@@ -13,15 +13,6 @@ current working directory, git branch and if its dirty, and of course the delta
 prompt character.
 
 # Installation
-Delta can be installed in 2 ways: with [Petals](https://github.com/Mewyuna/Petals),
-or manually.
-### Petals
-Add this after your `petals.init()`:
-```lua
-petals.load 'TorchedSammy/Delta'
-```  
-And then run `petals install`.
-
 ### Manually
 Clone this directory to one of the paths Hilbish looks for libraries at.
 ```
