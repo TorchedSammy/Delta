@@ -1,4 +1,5 @@
 local ansikit = require 'ansikit'
+local bait = require 'bait'
 local lunacolors = require 'lunacolors'
 
 function dirty()
@@ -37,4 +38,12 @@ function delta.prompt(exitcode)
 	return lunacolors.format(promptstr)
 end
 
+function delta.init()
+	prompt(delta.prompt(0))
+
+	bait.catch('command.exit', function(code)
+		prompt(delta.prompt(exitcode))
+	end)
+
+end
 return delta
