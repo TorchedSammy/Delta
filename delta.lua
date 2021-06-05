@@ -42,7 +42,7 @@ function delta.init()
 	prompt(delta.prompt(0))
 
 	bait.catch('command.exit', function(code)
-		prompt(delta.prompt(exitcode))
+		prompt(delta.prompt(code))
 	end)
 
 end
