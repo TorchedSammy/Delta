@@ -24,8 +24,11 @@ function branch()
 end
 
 local delta = {}
+local icons = {
+	'' -- shlvl
+}
 
-function delta.prompt(exitcode)
+function delta.prompt(exitcode, opts)
 	local fail = exitcode ~= 0
 	local promptstr = '{blue}%d'
 
@@ -33,16 +36,25 @@ function delta.prompt(exitcode)
 		promptstr = promptstr .. ' ' .. ansikit.getCSI('38;5;242')
 		.. branch() .. '' .. dirty()
 	end
+	if os.getenv 'SHLVL' - opts.shlvl ~= 0 then
+		promptstr = promptstr .. ' ' .. icons[1] .. ' ' .. (os.getenv 'SHLVL' + 1) - opts.shlvl
+	end
 	promptstr = promptstr .. '\n' .. (fail and '{red}' or '{green}') .. '∆ '
 
 	return lunacolors.format(promptstr)
 end
 
-function delta.init()
-	prompt(delta.prompt(0))
+function delta.init(o)
+	local opts = {}
+	o = o or {
+		shlvl = 3
+	}
+	setmetatable(opts, {__index = o})
+
+	prompt(delta.prompt(0, opts))
 
 	bait.catch('command.exit', function(code)
-		prompt(delta.prompt(code))
+		prompt(delta.prompt(code, opts))
 	end)
 
 end
