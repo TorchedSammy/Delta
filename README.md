@@ -25,21 +25,32 @@ Require Delta (`local delta = require 'delta'`) then initalize:
 delta.init()
 ```  
 It will handle the prompt on its own.
+If desired, Delta can be configured to change what number $SHLVL is on launch:  
+```lua
+delta.init {
+	shlvl = 2
+}
+```
 
 But if you want to manage your hooks/how it works more, you can go with the more
 manual approach. Assuming you have the default config, replace the `doPrompt`
 function with:  
 ```lua
-function doPrompt(exitcode)
-	prompt(delta.prompt(exitcode))
+function doPrompt(exitcode, o)
+	prompt(delta.prompt(exitcode, o))
 end
 ```  
 Add `0` as an arg to the first call, then just pass `code` in the command.exit hook:
 ```lua
-doPrompt(0)
+-- Default Options
+local opts = {
+	shlvl = 3
+}
+
+doPrompt(0, opts)
 
 bait.catch('command.exit', function(code)
-	doPrompt(code)
+	doPrompt(code, opts)
 end)
 ```  
 To which you can now `dofile(os.getenv 'HOME' .. '/.hilbishrc.lua')` or restart
