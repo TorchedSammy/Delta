@@ -25,10 +25,11 @@ Require Delta (`local delta = require 'delta'`) then initalize:
 delta.init()
 ```  
 It will handle the prompt on its own.
-If desired, Delta can be configured to change what number $SHLVL is on launch:  
+If desired, Delta can be configured like so:  
 ```lua
+-- The values provided here are the defaults
 delta.init {
-	shlvl = 2
+	shlvl = 3 -- What $SHLVL is on launch. Delta will show the current level number if it goes above this. Set to `nil` to not show at all
 }
 ```
 
