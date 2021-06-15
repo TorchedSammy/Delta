@@ -36,7 +36,7 @@ function delta.prompt(exitcode, opts)
 		promptstr = promptstr .. ' ' .. ansikit.getCSI('38;5;242')
 		.. branch() .. '' .. dirty()
 	end
-	if os.getenv 'SHLVL' - opts.shlvl ~= 0 then
+	if os.getenv 'SHLVL' - (opts.shlvl and opts.shlvl or os.getenv 'SHLVL') ~= 0 then
 		promptstr = promptstr .. ' ' .. icons[1] .. ' ' .. (os.getenv 'SHLVL' + 1) - opts.shlvl
 	end
 	promptstr = promptstr .. '\n' .. (fail and '{red}' or '{green}') .. '∆ '
