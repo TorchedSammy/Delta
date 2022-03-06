@@ -46,6 +46,7 @@ end
 
 function delta.init(o)
 	local opts = {}
+	prompt = prompt or hilbish.prompt -- pre 1.0
 	o = o or {
 		shlvl = 3
 	}
