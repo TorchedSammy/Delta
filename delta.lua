@@ -3,24 +3,21 @@ local bait = require 'bait'
 local lunacolors = require 'lunacolors'
 
 function dirty()
-	local res = io.popen 'git status --porcelain | wc -l'
-	local dirt = res:read():gsub('\n', '')
-	res:close()
+	local _, dirt = hilbish.run('git status --porcelain | wc -l', false)
+	dirt = dirt:gsub('\n', '')
 
 	return (dirt ~= '0' and '*' or '')
 end
 
 function isgitrepo()
-	local code = os.execute 'git rev-parse --git-dir > /dev/null 2>&1'
+	local code = hilbish.run 'git rev-parse --git-dir > /dev/null 2>&1'
 	return code == 0
 end
 
 function branch()
-	local res = io.popen 'git rev-parse --abbrev-ref HEAD 2> /dev/null'
-	local gitbranch = res:read()
-	res:close()
+	local _, gitbranch = hilbish.run('git rev-parse --abbrev-ref HEAD', false)
 
-	return gitbranch
+	return gitbranch:gsub('\n', '')
 end
 
 local delta = {}
@@ -55,8 +52,9 @@ function delta.init(o)
 	prompt(delta.prompt(0, opts))
 
 	bait.catch('command.exit', function(code)
-		prompt(delta.prompt(code, opts))
+		local p = delta.prompt(code, opts)
+		prompt(p)
 	end)
-
 end
+
 return delta

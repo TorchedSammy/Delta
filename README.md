@@ -5,7 +5,7 @@
 	<img src="showcase.png">
 </div>
 
-Delta is pretty, minimalist prompt for [Hilbish](https://github.com/Mewyuna/Hilbish),
+Delta is pretty, minimalist prompt for [Hilbish](https://github.com/Rosettea/Hilbish),
 inspired by [Pure](https://github.com/sindresorhus/pure).
 
 Delta shows all that you'll really need:
@@ -13,6 +13,8 @@ current working directory, git branch and if its dirty, and of course the delta
 prompt character.
 
 # Installation
+> Requires Hilbish 2.0+ (master branch or lua5.4 branch)
+
 ### Manually
 Clone this directory to one of the paths Hilbish looks for libraries at.
 ```
