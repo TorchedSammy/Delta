@@ -2,19 +2,19 @@ local ansikit = require 'ansikit'
 local bait = require 'bait'
 local lunacolors = require 'lunacolors'
 
-function dirty()
+local function dirty()
 	local _, dirt = hilbish.run('git status --porcelain | wc -l', false)
 	dirt = dirt:gsub('\n', '')
 
 	return (dirt ~= '0' and '*' or '')
 end
 
-function isgitrepo()
+local function isgitrepo()
 	local code = hilbish.run 'git rev-parse --git-dir > /dev/null 2>&1'
 	return code == 0
 end
 
-function branch()
+local function branch()
 	local _, gitbranch = hilbish.run('git rev-parse --abbrev-ref HEAD', false)
 
 	return gitbranch:gsub('\n', '')
