@@ -43,17 +43,16 @@ end
 
 function delta.init(o)
 	local opts = {}
-	prompt = prompt or hilbish.prompt -- pre 1.0
 	o = o or {
 		shlvl = 3
 	}
 	setmetatable(opts, {__index = o})
 
-	prompt(delta.prompt(0, opts))
+	hilbish.prompt(delta.prompt(0, opts))
 
 	bait.catch('command.exit', function(code)
 		local p = delta.prompt(code, opts)
-		prompt(p)
+		hilbish.prompt(p)
 	end)
 end
 
