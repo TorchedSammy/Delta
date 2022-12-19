@@ -1,6 +1,9 @@
 local promptua = require 'promptua'
 local git = require 'promptua.providers.git'
 promptua.setConfig {
+	prompt = {
+		icon = '∆'
+	},
 	delta = {
 		shlvl = 3
 	}
@@ -45,7 +48,5 @@ return {
 	},
 	{
 		provider = 'prompt.failSuccess',
-		icon = '∆',
-		style = 'green'
 	}
 }
